@@ -59,7 +59,7 @@ def preprocess(df):
 
 def save_data(df):
     df.to_csv(
-        "telco_preprocessed.csv",
+        "telco_preprocessing.csv",
         index=False
     )
 
