@@ -1,6 +1,13 @@
+from pathlib import Path
 import pandas as pd
 from sklearn.preprocessing import LabelEncoder
 from sklearn.preprocessing import StandardScaler
+
+
+BASE_DIR = Path(__file__).resolve().parent.parent
+
+DATA_PATH = BASE_DIR / "telco_raw.csv"
+OUTPUT_PATH = BASE_DIR / "telco_preprocessing.csv"
 
 
 def load_data(path):
@@ -57,23 +64,24 @@ def preprocess(df):
     return df
 
 
-def save_data(df):
+def save_data(df, path):
     df.to_csv(
-        "telco_preprocessing.csv",
+        path,
         index=False
     )
 
 
 def main():
 
-    df = load_data(
-        "../telco_raw.csv"
-    )
+    print(f"Loading data from: {DATA_PATH}")
+
+    df = load_data(DATA_PATH)
 
     df = preprocess(df)
 
-    save_data(df)
+    save_data(df, OUTPUT_PATH)
 
+    print(f"Dataset saved to: {OUTPUT_PATH}")
     print("Preprocessing selesai")
 
 
